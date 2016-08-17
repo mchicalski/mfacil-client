@@ -1,0 +1,15 @@
+<p>
+  site-app works!
+</p>
+
+  <section *ngIf="sites.length > 0">
+  <input class="new-todo" placeholder="sua busca" autofocus="" [(ngModel)]="q" >
+    <ul class="todo-list">
+      <li *ngFor="let site of heroes" >
+          <div align="center" >
+            <img src="{{site.icon}}" width="32px;"  (click)= "search(site)" >
+            <label>{{site.title}}</label>
+          </div>
+      </li>
+    </ul>
+  </section>
