@@ -13,8 +13,10 @@ import { SiteService } from '../site.service';
 export class SiteAppComponent implements OnInit {
   errorMessage: string;
   heroes: Site[];
+  hero: Site;
+
   q = '';
-  constructor(private siteService: SiteService) { }
+  constructor(private siteService: SiteService) { this.hero = new Site(); }
 
   ngOnInit() {
     this.getHeroes();
@@ -23,6 +25,14 @@ export class SiteAppComponent implements OnInit {
   getHeroes() {
     this.siteService.getHeroes()
                      .subscribe(
+                       heroes => this.heroes = heroes,
+                       error =>  this.errorMessage = <any>error);
+  }
+
+  createHero() {
+    console.log('oii'+ this.q);
+    this.siteService.createHero(this.q)
+                       .subscribe(
                        heroes => this.heroes = heroes,
                        error =>  this.errorMessage = <any>error);
   }

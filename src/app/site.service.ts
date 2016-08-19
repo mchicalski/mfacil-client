@@ -8,7 +8,7 @@ import { Observable }     from 'rxjs/Observable';
 import 'rxjs/Rx';
 
 @Injectable()
-export class SiteService {
+export class SiteService  {
 
 
   // Placeholder for last id so we can simulate
@@ -18,6 +18,7 @@ export class SiteService {
   // Placeholder for todo's
   sites: Site[] = [];
   private url = 'http://localhost:3000/api/sites'
+
   constructor(private http: Http) { 
         this.sites.push({
             title: 'DuckDuckGo', 
@@ -40,5 +41,11 @@ export class SiteService {
   getHeroes(): Observable<Site[]>{
     return this.http.get(this.url)
     .map(res => res.json());
+  }
+
+  createHero(uri): Observable<Site[]>{
+     console.log(this.url + '/discover/'+ encodeURIComponent(uri));
+     return this.http.get(this.url + '/discover/'+ encodeURIComponent(uri))
+     .map(res => res.json());
   }
 }
